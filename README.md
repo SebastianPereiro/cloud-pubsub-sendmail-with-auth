@@ -1,3 +1,19 @@
+# This is a slighly modified version of https://github.com/GoogleCloudPlatform/cloud-pubsub-sendmail
+## Changes:
+* requirements.txt
+* added SMTP server authentification
+## Additional helpful commands to prepare your GCP project for this Cloud Function:
+*create a service account:*  
+gcloud iam service-accounts create pubsub-sendmail --display-name pubsub-sendmail  
+*assign a serviceAccountUser role to it:*  
+gcloud projects add-iam-policy-binding $GCP_PROJECT --role roles/iam.serviceAccountUser --member serviceAccount:pubsub-sendmail@$GCP_PROJECT.iam.gserviceaccount.com  
+*create a PUB/SUB topic:*  
+gcloud pubsub topics create devops-to-email  
+*enable Cloud Functions API:*  
+gcloud services enable cloudbuild.googleapis.com cloudfunctions.googleapis.com  
+
+## Original README.md below:
+
 # pubsub_sendmail - Send emails from Google Cloud Pub/Sub events
 ## Overview
 

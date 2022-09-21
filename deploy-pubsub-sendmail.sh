@@ -52,22 +52,20 @@
 # MAIL_SERVER="smtp-relay.gmail.com:587"
 # MAIL_FORCE_TLS="FALSE"
 
-# Enable the services in case they are not enabled
-gcloud services enable cloudbuild.googleapis.com cloudfunctions.googleapis.com
-
-MAIL_FROM="fromuser@example.com"
-MAIL_TO="touser@example.com"
-# MAIL_SERVER="smtp-relay.gmail.com:465"
-MAIL_SUBJECT="Cloud Pub/Sub Email"
-MAIL_LOCAL_HOST="pubsub-sendmail-nat.example.com"
-MAIL_DEBUG="TRUE"
-MAIL_SERVER="smtp-relay.gmail.com:587"
+MAIL_FROM=""
+MAIL_TO=""
+MAIL_SERVER="smtp.mailgun.org:2525"
+MAIL_USER=""
+MAIL_PASS=""
+MAIL_SUBJECT="GCP Cloud Pub/Sub Email"
+MAIL_LOCAL_HOST="pubsub-sendmail-nat"
+MAIL_DEBUG="FALSE"
 MAIL_FORCE_TLS="FALSE"
-FN_PUBSUB_TOPIC="pubsub-sendmail"
-FN_REGION="us-central1"
+FN_PUBSUB_TOPIC="devops-to-email"
+FN_REGION="us-east1"
 FN_SOURCE_DIR="./"
-FN_SA="pubsub-sendmail@PROJECTID.iam.gserviceaccount.com"
-FN_VPC_CONN="pubsub-sendmail"
+FN_SA=""
+#FN_VPC_CONN="pubsub-sendmail"
 
 ENVVARS_FILE=/tmp/send_mail_envvars.$$
 
@@ -75,6 +73,8 @@ cat <<EOF >$ENVVARS_FILE
 MAIL_FROM: "$MAIL_FROM"
 MAIL_TO: "$MAIL_TO"
 MAIL_SERVER: "$MAIL_SERVER"
+MAIL_USER: "$MAIL_USER"
+MAIL_PASS: "$MAIL_PASS"
 MAIL_SUBJECT: "$MAIL_SUBJECT"
 MAIL_LOCAL_HOST: "$MAIL_LOCAL_HOST"
 MAIL_FORCE_TLS: "$MAIL_FORCE_TLS"

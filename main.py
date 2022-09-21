@@ -53,6 +53,8 @@ def pubsub_sendmail(event, context):
     mailTo        = os.environ.get('MAIL_TO', '').strip()
     mailSubject   = os.environ.get('MAIL_SUBJECT', '').strip()
     mailServer    = os.environ.get('MAIL_SERVER', '').strip()
+    mailSMTPUser  = os.environ.get('MAIL_USER', '').strip()
+    mailSMTPPass  = os.environ.get('MAIL_PASS', '').strip()
     mailLocalHost = os.environ.get('MAIL_LOCAL_HOST', '').strip()
     mailForceTls  = os.environ.get('MAIL_FORCE_TLS', '').strip()
     mailDebug     = os.environ.get('MAIL_DEBUG', '').strip()
@@ -101,6 +103,7 @@ def pubsub_sendmail(event, context):
         smtpServer.starttls()
         smtpServer.ehlo()
 
+    smtpServer.login(mailSMTPUser,mailSMTPPass)
     smtpServer.send_message(outboundMessage)
     smtpServer.quit()
 
